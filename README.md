@@ -50,7 +50,7 @@ found-cakrawala/
 └── docs/                # dokumentasi tambahan
     ├── API.md
     └── ERD.md
-​```
+```
 
 ## Entitas Data
 
