@@ -36,6 +36,7 @@ Alur intinya: user register/login → lapor barang (hilang atau ditemukan) → u
 | Upload foto | Multer (disimpan di server)         |
 
 ## Struktur Folder
+
 ​```
 found-cakrawala/
 ├── backend/            # REST API (Express + Prisma)
