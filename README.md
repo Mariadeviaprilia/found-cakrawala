@@ -1,6 +1,6 @@
 # Found@Cakrawala
 
-**Aplikasi web fullstack (REST API + SPA) untuk melaporkan, mencari, dan mengklaim barang hilang/ditemukan di lingkungan kampus.**
+**Aplikasi web fullstack untuk melaporkan, mencari, dan mengklaim barang hilang/ditemukan di lingkungan kampus.**
 
 Proyek akhir individu untuk mata kuliah **Web Advanced Development**.
 
@@ -37,18 +37,20 @@ Alur intinya: user register/login → lapor barang (hilang atau ditemukan) → u
 
 ## Struktur Folder
 
+​`
 found-cakrawala/
-├── backend/ # REST API (Express + Prisma)
-│ ├── prisma/ # schema & migrations
-│ ├── src/ # source code API
-│ └── uploads/ # foto laporan yang diupload
-├── frontend/ # Aplikasi React (Vite)
-│ └── src/
-│ ├── pages/ # Landing, Login, Register, Items, ItemDetail
-│ └── services/ # axios API client
-└── docs/ # dokumentasi tambahan
-├── API.md
-└── ERD.md
+├── backend/            # REST API (Express + Prisma)
+│   ├── prisma/          # schema & migrations
+│   ├── src/             # source code API
+│   └── uploads/         # foto laporan yang diupload
+├── frontend/            # Aplikasi React (Vite)
+│   └── src/
+│       ├── pages/       # Landing, Login, Register, Items, ItemDetail
+│       └── services/    # axios API client
+└── docs/                # dokumentasi tambahan
+    ├── API.md
+    └── ERD.md
+​`
 
 ## Entitas Data
 

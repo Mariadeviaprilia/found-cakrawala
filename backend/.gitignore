@@ -3,3 +3,9 @@ node_modules
 .env
 
 /generated/prisma
+
+# Database file lokal, jangan ikut ke-commit
+dev.db
+
+# Foto hasil upload testing, jangan ikut ke-commit
+uploads/*

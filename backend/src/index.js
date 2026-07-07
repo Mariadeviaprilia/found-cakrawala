@@ -81,12 +81,10 @@ app.post("/api/auth/login", async (req, res) => {
     const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
       expiresIn: "1d",
     });
-    return res
-      .status(200)
-      .json({
-        user: { id: user.id, name: user.name, email: user.email },
-        token,
-      });
+    return res.status(200).json({
+      user: { id: user.id, name: user.name, email: user.email },
+      token,
+    });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
@@ -141,12 +139,9 @@ app.post(
     try {
       const { title, description, location, category, type } = req.body;
       if (!title || !description || !location || !category || !type)
-        return res
-          .status(400)
-          .json({
-            error:
-              "title, description, location, category, dan type wajib diisi",
-          });
+        return res.status(400).json({
+          error: "title, description, location, category, dan type wajib diisi",
+        });
       if (type !== "lost" && type !== "found")
         return res.status(400).json({ error: "type harus lost atau found" });
 
@@ -190,6 +185,24 @@ app.patch("/api/items/:id/status", verifyToken, async (req, res) => {
       data: { status },
     });
     return res.status(200).json(updated);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.delete("/api/items/:id", verifyToken, async (req, res) => {
+  try {
+    const itemId = parseInt(req.params.id);
+    const item = await db.item.findUnique({ where: { id: itemId } });
+    if (!item)
+      return res.status(404).json({ error: "Laporan tidak ditemukan" });
+    if (item.userId !== req.userId)
+      return res
+        .status(403)
+        .json({ error: "Tidak berhak menghapus laporan ini" });
+    await db.claim.deleteMany({ where: { itemId } });
+    await db.item.delete({ where: { id: itemId } });
+    return res.status(200).json({ message: "Laporan berhasil dihapus" });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }

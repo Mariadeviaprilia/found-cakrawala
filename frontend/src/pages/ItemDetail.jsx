@@ -72,6 +72,21 @@ function ItemDetail() {
     }
   }
 
+  async function handleDelete() {
+    if (
+      !window.confirm(
+        "Yakin mau hapus laporan ini? Tindakan ini tidak bisa dibatalkan.",
+      )
+    )
+      return;
+    try {
+      await api.delete(`/items/${id}`);
+      navigate("/items");
+    } catch (err) {
+      alert(err.response?.data?.error || "Gagal menghapus laporan");
+    }
+  }
+
   if (loading)
     return (
       <div
@@ -399,9 +414,29 @@ function ItemDetail() {
                     fontSize: 14,
                     fontFamily: "Poppins, sans-serif",
                     width: "100%",
+                    marginBottom: isOwner ? 10 : 0,
                   }}
                 >
                   Tandai Sudah Selesai
+                </button>
+              )}
+              {isOwner && (
+                <button
+                  onClick={handleDelete}
+                  style={{
+                    background: "transparent",
+                    color: "#C44545",
+                    border: "1.5px solid #C44545",
+                    borderRadius: 20,
+                    padding: "10px 24px",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    fontSize: 14,
+                    fontFamily: "Poppins, sans-serif",
+                    width: "100%",
+                  }}
+                >
+                  Hapus Laporan
                 </button>
               )}
             </div>

@@ -142,6 +142,20 @@ Mengubah status laporan. Hanya bisa dilakukan oleh pelapor (pemilik) laporan ter
 
 ---
 
+### `DELETE /api/items/:id` 🔒 JWT
+
+Menghapus laporan. Hanya bisa dilakukan oleh pelapor (pemilik) laporan tersebut. Klaim yang terkait dengan laporan ini ikut terhapus.
+
+**Response `200 OK`**
+
+```json
+{ "message": "Laporan berhasil dihapus" }
+```
+
+**Error**: `403` jika bukan pemilik laporan, `404` jika laporan tidak ditemukan.
+
+---
+
 ## Claims
 
 ### `GET /api/items/:id/claims` 🔒 JWT
