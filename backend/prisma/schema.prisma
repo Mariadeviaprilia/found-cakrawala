@@ -1,0 +1,55 @@
+// prisma/schema.prisma
+// UAS — Found@Cakrawala
+// Web Advanced Development
+//
+// Nama: Maria Devi Aprilia
+// NIM: 24110400032
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  items  Item[]
+  claims Claim[]
+}
+
+model Item {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  location    String
+  category    String
+  type        String
+  status      String   @default("open")
+  imageUrl    String?
+  date        DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  userId Int
+  user   User    @relation(fields: [userId], references: [id])
+  claims Claim[]
+}
+
+model Claim {
+  id        Int      @id @default(autoincrement())
+  message   String
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+
+  itemId     Int
+  item       Item @relation(fields: [itemId], references: [id])
+  claimantId Int
+  claimant   User @relation(fields: [claimantId], references: [id])
+}
